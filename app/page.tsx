@@ -56,7 +56,7 @@ function groupNotesByDate(notes: Note[]): Record<string, Note[]> {
 }
 
 export default function Home() {
-  const { notes, addNote, updateNote, deleteNote, toggleTodo, isLoaded } = useNotes();
+  const { notes, addNote, updateNote, deleteNote, toggleTodo, toggleImportant, isLoaded } = useNotes();
   const { 
     permission, 
     requestPermission, 
@@ -289,7 +289,8 @@ export default function Home() {
                   <NoteCard 
                     key={note.id} 
                     note={note} 
-                    onToggleTodo={toggleTodo} 
+                    onToggleTodo={toggleTodo}
+                    onToggleImportant={toggleImportant}
                     onClick={() => setSelectedNote(note)}
                   />
                 ))}

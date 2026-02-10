@@ -59,6 +59,13 @@ export function useNotes() {
         saveNotes(updated);
     };
 
+    const toggleImportant = (noteId: string) => {
+        const updated = notes.map(n =>
+            n.id === noteId ? { ...n, isImportant: !n.isImportant } : n
+        );
+        saveNotes(updated);
+    };
+
     return {
         notes,
         isLoaded,
@@ -66,6 +73,7 @@ export function useNotes() {
         batchAddNotes,
         updateNote,
         deleteNote,
-        toggleTodo
+        toggleTodo,
+        toggleImportant
     };
 }

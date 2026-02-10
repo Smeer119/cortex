@@ -1,17 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle2, Circle, Hash } from "lucide-react";
+import { CheckCircle2, Circle, Hash, Star } from "lucide-react";
 import { Note } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 interface NoteCardProps {
   note: Note;
   onToggleTodo?: (id: string, index: number) => void;
+  onToggleImportant?: (id: string) => void;
   onClick?: () => void;
 }
 
-export function NoteCard({ note, onToggleTodo, onClick }: NoteCardProps) {
+export function NoteCard({ note, onToggleTodo, onToggleImportant, onClick }: NoteCardProps) {
   return (
     <motion.div
       layout
@@ -23,10 +24,26 @@ export function NoteCard({ note, onToggleTodo, onClick }: NoteCardProps) {
       className="bg-surface rounded-[24px] p-5 shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-border cursor-pointer transition-all hover:shadow-lg mb-4 break-inside-avoid relative overflow-hidden group"
     >
       <div className="flex justify-between items-start mb-2">
-        <h3 className="font-semibold text-lg text-primary leading-tight line-clamp-2">{note.title}</h3>
-        {note.isImportant && (
-          <div className="h-2 w-2 rounded-full bg-red-400 mt-1.5 shrink-0" />
-        )}
+        <h3 className="font-semibold text-lg text-primary leading-tight line-clamp-2 flex-1 pr-2">{note.title}</h3>
+        
+        {/* Star Icon - Toggle Important */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleImportant?.(note.id);
+          }}
+          className="shrink-0 p-1 hover:scale-110 transition-transform"
+          title={note.isImportant ? "Remove from important" : "Mark as important"}
+        >
+          <Star 
+            className={cn(
+              "w-5 h-5 transition-colors",
+              note.isImportant 
+                ? "fill-yellow-400 text-yellow-400" 
+                : "text-gray-300 hover:text-yellow-400"
+            )} 
+          />
+        </button>
       </div>
 
       <div className="max-h-[200px] overflow-hidden relative">

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, CheckCircle2, Circle, Trash2, Calendar, Plus, Edit2, Image as ImageIcon, Save, Bell, BellOff } from "lucide-react";
+import { X, CheckCircle2, Circle, Trash2, Calendar, Plus, Edit2, Image as ImageIcon, Save, Bell, BellOff, Star } from "lucide-react";
 import { Note, NoteItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { useState, useRef } from "react";
@@ -135,6 +135,23 @@ export function NoteDetailModal({ note, onClose, onUpdate, onDelete }: NoteDetai
                             <Edit2 className="w-5 h-5" />
                         </button>
                     )}
+                    
+                    {/* Star Icon - Toggle Important */}
+                    <button 
+                        onClick={() => onUpdate(note.id, { isImportant: !note.isImportant })}
+                        className="p-2 rounded-full hover:bg-yellow-50 transition-colors"
+                        title={note.isImportant ? "Remove from important" : "Mark as important"}
+                    >
+                        <Star 
+                            className={cn(
+                                "w-5 h-5 transition-colors",
+                                note.isImportant 
+                                    ? "fill-yellow-400 text-yellow-400" 
+                                    : "text-gray-400 hover:text-yellow-400"
+                            )} 
+                        />
+                    </button>
+                    
                     <button 
                         onClick={() => {
                             if(confirm("Delete this note?")) {
