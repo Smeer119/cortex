@@ -10,6 +10,7 @@ import { RecorderOverlay } from "@/components/RecorderOverlay";
 import { NoteDetailModal } from "@/components/NoteDetailModal";
 import { NotificationContainer } from "@/components/InAppNotification";
 import { NotificationCenter } from "@/components/NotificationCenter";
+import { DataSync } from "@/components/DataSync";
 import { useNotifications, useInAppNotifications } from "@/lib/useNotifications";
 import { cn } from "@/lib/utils";
 import { Note } from "@/lib/types";
@@ -230,6 +231,11 @@ export default function Home() {
 
       {/* Search */}
       <SearchBar onSearch={handleSearch} isSearching={isSearching} />
+
+      {/* Data Sync - Export/Import */}
+      <div className="mb-6 flex justify-end">
+        <DataSync />
+      </div>
 
       {/* Filters */}
       <div className="flex gap-2 mb-8 overflow-x-auto pb-2 scrollbar-hide">
