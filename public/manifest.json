@@ -1,0 +1,17 @@
+{
+    "name": "Sam AI",
+    "short_name": "Sam",
+    "description": "Ambient thoughts to structured intelligence.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#F6F7F4",
+    "theme_color": "#F6F7F4",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "/icon.png",
+            "sizes": "1024x1024",
+            "type": "image/png"
+        }
+    ]
+}
