@@ -14,6 +14,7 @@ export function RecorderOverlay({ onGenericClose, onTranscriptionComplete }: Rec
   const [isListening, setIsListening] = useState(true);
   const recognitionRef = useRef<any>(null);
   const hasSubmittedRef = useRef(false);
+  const lastProcessedIndexRef = useRef(0);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -27,11 +28,25 @@ export function RecorderOverlay({ onGenericClose, onTranscriptionComplete }: Rec
 
         recognition.onresult = (event: any) => {
           let fullTranscript = '';
-          // Iterate over ALL results, not just from resultIndex, to ensure we get the whole session
-          for (let i = 0; i < event.results.length; i++) {
-            fullTranscript += event.results[i][0].transcript;
+          // Only process new results from the last processed index onward
+          for (let i = lastProcessedIndexRef.current; i < event.results.length; i++) {
+            if (event.results[i].isFinal) {
+              fullTranscript += event.results[i][0].transcript + ' ';
+              lastProcessedIndexRef.current = i + 1;
+            } else {
+              // Include interim results for real-time display
+              fullTranscript += event.results[i][0].transcript;
+            }
           }
-          setTranscript(fullTranscript);
+          
+          // Accumulate with previous transcript
+          setTranscript(prev => {
+            // If we have new final results, append them
+            if (fullTranscript.trim()) {
+              return (prev + ' ' + fullTranscript).trim();
+            }
+            return prev;
+          });
         };
 
         recognition.onend = () => {
