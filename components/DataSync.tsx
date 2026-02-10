@@ -4,7 +4,7 @@ import { Download, Upload } from "lucide-react";
 import { useNotes } from "@/lib/store";
 
 export function DataSync() {
-    const { notes, addNote } = useNotes();
+    const { notes, batchAddNotes } = useNotes();
 
     const exportData = () => {
         const data = {
@@ -47,17 +47,20 @@ export function DataSync() {
                 );
 
                 if (confirmed) {
-                    data.notes.forEach((note: any) => {
-                        // Generate new IDs to avoid conflicts
-                        addNote({
-                            ...note,
-                            id: crypto.randomUUID()
-                        });
-                    });
+                    // Generate new IDs for all notes to avoid conflicts
+                    const notesWithNewIds = data.notes.map((note: any) => ({
+                        ...note,
+                        id: crypto.randomUUID()
+                    }));
+                    
+                    // Import all notes at once
+                    batchAddNotes(notesWithNewIds);
+                    
                     alert(`✅ Successfully imported ${data.notes.length} notes!`);
                 }
             } catch (err) {
                 alert('Error importing file: ' + (err as Error).message);
+                console.error('Import error:', err);
             }
         };
 

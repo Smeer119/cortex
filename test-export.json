@@ -1,0 +1,72 @@
+{
+  "notes": [
+    {
+      "id": "test-1",
+      "timestamp": 1770735860118,
+      "type": "note",
+      "title": "Test Note 1",
+      "body": "First test note",
+      "tags": [
+        "#test"
+      ],
+      "isImportant": false
+    },
+    {
+      "id": "test-2",
+      "timestamp": 1770735860118,
+      "type": "todo",
+      "title": "Test Todo 2",
+      "body": "Second test todo",
+      "items": [
+        {
+          "text": "Item 1",
+          "done": false
+        },
+        {
+          "text": "Item 2",
+          "done": true
+        }
+      ],
+      "tags": [
+        "#test",
+        "#todo"
+      ],
+      "isImportant": true
+    },
+    {
+      "id": "test-3",
+      "timestamp": 1770735860118,
+      "type": "note",
+      "title": "Test Note 3",
+      "body": "Third test note",
+      "tags": [
+        "#test"
+      ],
+      "isImportant": false
+    },
+    {
+      "id": "test-4",
+      "timestamp": 1770735860118,
+      "type": "note",
+      "title": "Test Note 4",
+      "body": "Fourth test note",
+      "tags": [
+        "#test"
+      ],
+      "isImportant": false
+    },
+    {
+      "id": "test-5",
+      "timestamp": 1770735860118,
+      "type": "note",
+      "title": "Test Note 5",
+      "body": "Fifth test note",
+      "tags": [
+        "#test"
+      ],
+      "isImportant": false
+    }
+  ],
+  "exportedAt": 1770735860118,
+  "version": "1.0"
+}

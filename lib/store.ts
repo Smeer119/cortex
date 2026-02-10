@@ -50,10 +50,16 @@ export function useNotes() {
         }
     };
 
+    const batchAddNotes = (newNotes: Note[]) => {
+        const updated = [...newNotes, ...notes];
+        saveNotes(updated);
+    };
+
     return {
         notes,
         isLoaded,
         addNote,
+        batchAddNotes,
         updateNote,
         deleteNote,
         toggleTodo
