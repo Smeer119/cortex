@@ -57,6 +57,9 @@ export function DataSync() {
                     batchAddNotes(notesWithNewIds);
                     
                     alert(`✅ Successfully imported ${data.notes.length} notes!`);
+                    
+                    // Reload page to ensure proper rendering
+                    window.location.reload();
                 }
             } catch (err) {
                 alert('Error importing file: ' + (err as Error).message);

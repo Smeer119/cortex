@@ -51,7 +51,11 @@ export function useNotes() {
     };
 
     const batchAddNotes = (newNotes: Note[]) => {
+        console.log('📥 Batch adding notes:', newNotes.length);
+        console.log('📋 Current notes:', notes.length);
         const updated = [...newNotes, ...notes];
+        console.log('✅ Total after import:', updated.length);
+        console.log('🔍 Note titles:', updated.map(n => n.title));
         saveNotes(updated);
     };
 
